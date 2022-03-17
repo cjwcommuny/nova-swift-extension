@@ -1,0 +1,47 @@
+{
+    "identifier": "cjwcommuny.novaswift",
+    "name": "nova-swift",
+    "organization": "cjwcommuny",
+    "description": "Swift language server",
+    "version": "0.0.1",
+    "categories": ["languages", "formatters"],
+    
+    "main": "main.js",
+    
+    "entitlements": {
+        "process": true,
+        "filesystem": "readonly"
+    },
+    
+    "config": [
+        {
+            "key": "swift.language-server-path",
+            "title": "Language Server (sourcekit-lsp) Path",
+            "type": "path",
+            "default": "/usr/bin/sourcekit-lsp"
+        },
+        {
+            "key": "swift.swift-format-path",
+            "title": "Formatter (swift-format) Path",
+            "type": "path",
+            "default": "/opt/homebrew/bin/swift-format"
+        }
+    ],
+    "activationEvents": [
+        "onLanguage:swift",
+        "onWorkspaceContains:Package.swift"
+    ],
+    "commands": {
+        "editor": [
+            {
+                "title": "Format",
+                "command": "swift.format",
+                "shortcut": "opt-shift-f",
+                "when": "editorHasFocus && documentHasPath",
+                "filters": {
+                    "syntaxes": ["swift"]
+                }
+            }
+        ]
+    }
+}
