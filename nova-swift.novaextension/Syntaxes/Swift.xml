@@ -57,15 +57,149 @@
 <!--    </symbols>-->
 
     <scopes>
-       <include syntax="self" collection="values" />
-       <include syntax="self" collection="comments" />
-       <include syntax="self" collection="imports" />
-       <include syntax="self" collection="definitions" />
-<!--        <include syntax="self" collection="identifiers" />-->
+        <include syntax="self" collection="values" />
+        <include syntax="self" collection="comments" />
+        <include syntax="self" collection="imports" />
+        <include syntax="self" collection="definitions" />
         <include syntax="self" collection="keywords" />
     </scopes>
 
     <collections>
+        <collection name="definitions">
+            <scope name="swift.definition.function">
+                <symbol type="function">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(func)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.function.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+
+            <scope name="swift.definition.struct">
+                <symbol type="class">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(struct)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.type.struct.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+
+            <scope name="swift.definition.enum">
+                <symbol type="enum">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(enum)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.type.enum.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+
+            <scope name="swift.definition.class">
+                <symbol type="class">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(class)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.type.class.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+
+            <scope name="swift.definition.protocol">
+                <symbol type="interface">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(protocol)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.type.protocol.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+
+            <scope name="swift.definition.extension">
+                <symbol type="category">
+                    <display-name>
+                        <component variable="name" />
+                    </display-name>
+                </symbol>
+                <starts-with>
+                    <expression>(extension)\s+([a-zA-Z_][a-zA-Z0-9_]*)</expression>
+                    <capture number="1" name="swift.keyword"/>
+                    <capture number="2" name="swift.identifier.type.struct.name"/>
+                </starts-with>
+                <ends-with>
+                    <expression>(?={)</expression>
+                </ends-with>
+                <subscopes>
+                    <include syntax="self" collection="comments"/>
+                    <include syntax="self" collection="values" />
+                    <include syntax="self" collection="keywords" />
+                </subscopes>
+            </scope>
+        </collection>
+
+        <collection name="identifier">
+            <scope name="swift.identifier">
+                <expression>
+                    [a-zA-Z_][a-zA-Z0-9_]*
+                </expression>
+            </scope>
+        </collection>
 
         <collection name="values">
             <include syntax="self" collection="strings" />
@@ -220,6 +354,7 @@
                     <string>weak</string>
                     <string>willSet</string>
                     <string>async</string>
+                    <string>await</string>
                     <string>any</string>
                     <string>some</string>
                 </strings>
